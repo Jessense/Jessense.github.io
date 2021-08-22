@@ -2,9 +2,3 @@ baseURL = 'https://jessense.github.io/'
 languageCode = 'en-us'
 title = 'Jessense's Blog'
 theme = "yinyang"
-DefaultContentLanguage = "cn"
-
-[params]
-mainSections = ["posts"]
-headTitle = "Jessense"
-

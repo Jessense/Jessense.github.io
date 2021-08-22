@@ -7,16 +7,4 @@ DefaultContentLanguage = "cn"
 [params]
 mainSections = ["posts"]
 headTitle = "Jessense"
-#disqus = "joway" # disqus account name
-extraHead = '<script async src="https://www.googletagmanager.com/gtag/js?id=UA-xxx"></script>'
-[[params.socials]]
-name = "About Me"
-link = "https://jessense.github.io/"
-[[params.socials]]
-name = "Github"
-link = "https://github.com/Jessense"
-postHeaderContent = ""
-#postFooterContent = "<br/><br/><p>Subscribe to：<a target='_blank' href='https://mailchi.mp/a1a0d59e7a19/joway'>Joway's Blog</a></p>"
-# extraCSSFiles = ["css/foo.css", "css/bar.css"]
-extraCSSFiles = []
 

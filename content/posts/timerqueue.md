@@ -17,7 +17,10 @@ typedef void*(*callback_t) (void*);
 struct timer {
     timespec expire;
     callback_t callback;
-    timer(timespec expire_, callback_t callback_): expire(expire_), callback(callback_) {}
+    timer(timespec expire_, callback_t callback_)
+        : expire(expire_), callback(callback_) 
+    {
+    }
 };
 
 // 主线程添加的 timer，子线程需要处理
@@ -32,7 +35,8 @@ timespec get_epoch_now() {
 }
 
 bool earlier(const timespec& a, const timespec& b) {
-    return a.tv_sec < b.tv_sec || (a.tv_sec == b.tv_sec && a.tv_nsec < b.tv_nsec);
+    return a.tv_sec < b.tv_sec 
+        || (a.tv_sec == b.tv_sec && a.tv_nsec < b.tv_nsec);
 }
 
 void* eventloop(void* data) {
@@ -55,8 +59,10 @@ void* eventloop(void* data) {
             timer next_timer = q.top();
             pthread_mutex_lock(&mutex);
             int err = 0;
-            while (pending_timers.empty() && err != ETIMEDOUT) { // 等待 next_timer expire 或主线程添加新的 timer
-                err = pthread_cond_timedwait(&cond, &mutex, &next_timer.expire); // timewait 接受的是绝对时间
+            // 等待 next_timer expire 或主线程添加新的 timer
+            while (pending_timers.empty() && err != ETIMEDOUT) {
+                // timewait 接受的是绝对时间
+                err = pthread_cond_timedwait(&cond, &mutex, &next_timer.expire);
             }
             if (err == ETIMEDOUT) { //如果是 next_timer expire
                 pthread_t tid;
